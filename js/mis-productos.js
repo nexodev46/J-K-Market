@@ -8,20 +8,22 @@ const contador = document.getElementById('contador-productos');
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // --- MODIFICACIÓN AQUÍ: Solo mostramos el correo, quitamos el botón SALIR ---
-        userHeader.innerHTML = `
-            <span id="user-email-display" class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-400">
-                ${user.email}
-            </span>
-        `;
+        // --- LIMPIEZA TOTAL DEL HEADER ---
+        // Al dejarlo vacío, quitamos tanto el botón "SALIR" como el correo.
+        if (userHeader) {
+            userHeader.innerHTML = "";
+        }
 
         // Consulta de productos del usuario
         const q = query(collection(db, "productos"), where("vendedorId", "==", user.uid));
 
         onSnapshot(q, (snapshot) => {
             lista.innerHTML = "";
+            
             // Actualizar contador con estilo
-            if (contador) contador.innerText = `${snapshot.size} en total`;
+            if (contador) {
+                contador.innerText = `(${snapshot.size} en total)`;
+            }
 
             if (snapshot.empty) {
                 lista.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10 font-bold italic">No tienes anuncios publicados todavía.</p>`;
