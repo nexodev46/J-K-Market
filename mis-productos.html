@@ -11,6 +11,10 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-card { animation: fadeIn 0.5s ease-out forwards; }
+
+        /* Ocultar barra de scroll en el menú de categorías móvil */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-[#1E1E1E] text-white font-sans min-h-screen">
@@ -20,12 +24,12 @@
         
         <div id="user-header" class="flex items-center gap-4">
             <span id="user-email-display" class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-400">
-                </span>
+            </span>
         </div>
     </header>
 
     <main class="max-w-6xl mx-auto p-4 md:p-8">
-        <div class="bg-[#3B7A57] rounded-[2.5rem] p-8 mb-10 shadow-2xl flex flex-col md:flex-row justify-between items-center gap-6 border border-white/5">
+        <div class="bg-[#3B7A57] rounded-[2.5rem] p-8 mb-6 shadow-2xl flex flex-col md:flex-row justify-between items-center gap-6 border border-white/5">
             <div>
                 <h2 class="text-3xl font-black italic uppercase tracking-tighter">Mis Anuncios</h2>
                 <p id="contador-productos" class="text-green-100 font-medium opacity-80 text-xs tracking-widest uppercase mt-1">(Cargando...)</p>
@@ -35,8 +39,15 @@
             </a>
         </div>
 
+        <div class="md:hidden flex gap-3 overflow-x-auto pb-8 px-2 no-scrollbar">
+            <button class="bg-[#3B7A57] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap shadow-lg shadow-green-900/40">Todos</button>
+            <button class="bg-white/5 border border-white/10 text-gray-400 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Ropa</button>
+            <button class="bg-white/5 border border-white/10 text-gray-400 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Electrónica</button>
+            <button class="bg-white/5 border border-white/10 text-gray-400 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Hogar</button>
+        </div>
+
         <div id="mis-productos-lista" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            </div>
+        </div>
     </main>
 
     <div id="modal-editar" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
@@ -44,13 +55,13 @@
             <h3 class="text-2xl font-black mb-6 uppercase tracking-tighter italic text-center">Editar Anuncio</h3>
             <form id="form-editar" class="space-y-5">
                 <input type="hidden" id="edit-id">
-                <input type="text" id="edit-titulo" placeholder="Título" class="w-full bg-[#1E1E1E] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm">
-                <input type="number" id="edit-precio" placeholder="Precio" class="w-full bg-[#1E1E1E] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm">
-                <input type="text" id="edit-whatsapp" placeholder="WhatsApp" class="w-full bg-[#1E1E1E] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm">
+                <input type="text" id="edit-titulo" placeholder="Título" class="w-full bg-[#1E1E1E] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm font-bold">
+                <input type="number" id="edit-precio" placeholder="Precio" class="w-full bg-[#1E1E1E] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm font-bold">
+                <input type="text" id="edit-whatsapp" placeholder="WhatsApp" class="w-full bg-[#1E1E1E] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm font-bold">
                 
                 <div class="flex gap-4 pt-6">
                     <button type="button" onclick="cerrarModal()" class="flex-1 text-gray-500 font-black text-[10px] uppercase hover:text-white transition">Cancelar</button>
-                    <button type="submit" class="flex-2 bg-[#3B7A57] text-white py-4 px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest">Guardar</button>
+                    <button type="submit" class="flex-2 bg-[#3B7A57] text-white py-4 px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-green-900/20">Guardar</button>
                 </div>
             </form>
         </div>
