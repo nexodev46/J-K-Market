@@ -6,72 +6,111 @@
     <title>J^K Market | Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .custom-shadow { shadow-offset: 0px 10px; shadow-blur: 30px; shadow-color: rgba(0,0,0,0.05); }
-     
-    /* Animación para que los productos aparezcan suavemente */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* Animación para que los productos aparezcan suavemente */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.animate-fadeIn {
-    animation: fadeIn 0.6s ease-out forwards;
-}
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
 
-/* Animación de pulso para el texto de carga */
-.animate-pulse-slow {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
+        /* Animación de pulso para el texto de carga */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
+        .animate-pulse-slow {
+            animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
 
+        /* Scrollbar personalizada para el sidebar */
+        aside::-webkit-scrollbar {
+            width: 5px;
+        }
+        aside::-webkit-scrollbar-thumb {
+            background: #3B7A57;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body class="bg-[#F8F9FA] text-gray-800 font-sans">
 
-    <header class="bg-[#2D3436] text-white py-4 px-6 sticky top-0 z-50">
+    <header class="bg-[#2D3436] text-white py-4 px-6 sticky top-0 z-50 shadow-2xl">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <h1 class="text-2xl font-bold tracking-tighter">J^K <span class="font-light">Market</span></h1>
+            <h1 class="text-2xl font-black tracking-tighter">J^K <span class="font-light opacity-70">Market</span></h1>
             
             <div class="flex-1 max-w-2xl w-full relative">
                 <input type="text" id="buscador" placeholder="Buscar en J^K Market..." 
-                    class="w-full bg-white text-gray-800 rounded-md py-2 px-10 outline-none focus:ring-2 focus:ring-green-500 text-sm">
-                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    class="w-full bg-white text-gray-800 rounded-full py-2 px-10 outline-none focus:ring-2 focus:ring-[#3B7A57] text-sm shadow-inner">
+                <svg class="w-4 h-4 text-gray-400 absolute left-4 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
 
-            <div id="menu-auth" class="flex items-center gap-6 text-xs font-bold tracking-widest uppercase">
+            <div id="menu-auth" class="flex items-center gap-4">
                 </div>
         </div>
     </header>
 
     <div class="flex flex-col md:flex-row">
-        <aside class="w-full md:w-64 bg-[#2D3436] text-gray-400 min-h-screen p-6 hidden md:block">
-            <h3 class="text-white text-sm font-bold mb-6 uppercase tracking-widest">Filters</h3>
-            <div class="space-y-6">
-                <div>
-                    <p class="text-[10px] mb-3 uppercase font-black">Categorías</p>
-                    <ul class="space-y-2 text-xs">
-                        <li class="flex items-center gap-2 hover:text-white cursor-pointer"><input type="checkbox" class="rounded bg-gray-700 border-none"> Ropa</li>
-                        <li class="flex items-center gap-2 hover:text-white cursor-pointer"><input type="checkbox" class="rounded bg-gray-700 border-none"> Electrónica</li>
-                        <li class="flex items-center gap-2 hover:text-white cursor-pointer"><input type="checkbox" class="rounded bg-gray-700 border-none"> Hogar</li>
-                    </ul>
+        <aside class="w-full md:w-64 bg-[#2D3436] text-gray-400 md:h-[calc(100vh-72px)] sticky top-[72px] p-6 flex flex-col justify-between hidden md:flex border-r border-gray-700">
+            
+            <div>
+                <h3 class="text-white text-xs font-black mb-8 uppercase tracking-[0.2em] opacity-50">Filters</h3>
+                
+                <div class="space-y-8">
+                    <div>
+                        <p class="text-[10px] mb-4 uppercase font-black text-white tracking-widest">Categorías</p>
+                        <ul class="space-y-3 text-xs">
+                            <li class="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 rounded bg-gray-800 border-none accent-[#3B7A57] cursor-pointer"> 
+                                <span class="group-hover:translate-x-1 transition-transform">Ropa</span>
+                            </li>
+                            <li class="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 rounded bg-gray-800 border-none accent-[#3B7A57] cursor-pointer"> 
+                                <span class="group-hover:translate-x-1 transition-transform">Electrónica</span>
+                            </li>
+                            <li class="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                                <input type="checkbox" class="w-4 h-4 rounded bg-gray-800 border-none accent-[#3B7A57] cursor-pointer"> 
+                                <span class="group-hover:translate-x-1 transition-transform">Hogar</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] mb-4 uppercase font-black text-white tracking-widest">Rango de Precio</p>
+                        <input type="range" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#3B7A57]">
+                        <div class="flex justify-between mt-2 text-[10px] font-bold">
+                            <span>$0</span>
+                            <span>$10,000</span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-[10px] mb-3 uppercase font-black">Precio</p>
-                    <input type="range" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-green-500">
-                </div>
+            </div>
+
+            <div id="contenedor-salir-sidebar" class="pt-6 border-t border-gray-700 hidden">
+                <button id="btn-cerrar-sesion-sidebar" 
+                    class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl text-red-400 hover:text-white hover:bg-red-500/10 transition-all font-black text-[10px] uppercase tracking-widest">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Cerrar Sesión
+                </button>
             </div>
         </aside>
 
         <main class="flex-1 p-4 md:p-8">
-            <div class="bg-[#3B7A57] rounded-lg p-10 mb-10 text-white relative overflow-hidden">
+            <div class="bg-[#3B7A57] rounded-3xl p-8 md:p-12 mb-10 text-white relative overflow-hidden shadow-2xl shadow-green-900/20">
                 <div class="relative z-10">
-                    <h2 class="text-4xl font-black mb-2 uppercase italic tracking-tighter">¡OFERTAS DE VERANO!</h2>
-                    <p class="text-xl font-light">Hasta <span class="font-bold underline text-green-200">50% DTO</span></p>
+                    <span class="bg-black/20 text-[10px] px-3 py-1 rounded-full uppercase font-black tracking-widest mb-4 inline-block">Temporada 2026</span>
+                    <h2 class="text-4xl md:text-6xl font-black mb-2 uppercase italic tracking-tighter leading-none">¡OFERTAS DE VERANO!</h2>
+                    <p class="text-lg md:text-xl font-light opacity-90">Toda la tienda con hasta <span class="font-bold underline decoration-2 underline-offset-4 text-white">50% DTO</span></p>
                 </div>
-                <div class="absolute right-0 top-0 h-full w-1/3 bg-white/5 skew-x-12"></div>
+                <div class="absolute right-[-10%] top-[-20%] h-[150%] w-1/2 bg-white/10 skew-x-[25deg] blur-3xl"></div>
             </div>
 
-            <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 </div>
         </main>
     </div>
