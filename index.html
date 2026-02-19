@@ -3,31 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J^K Market | Inicio</title>
+    <title>J^K Market | Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-gray-50 text-gray-800">
+    <style>
+        .custom-shadow { shadow-offset: 0px 10px; shadow-blur: 30px; shadow-color: rgba(0,0,0,0.05); }
+     
+    /* Animación para que los productos aparezcan suavemente */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    <header class="bg-white shadow-sm sticky top-0 z-50 p-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-blue-600 tracking-tight">
-                J^K <span class="text-gray-900">Market</span>
-            </h1>
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Animación de pulso para el texto de carga */
+.animate-pulse-slow {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+    </style>
+</head>
+<body class="bg-[#F8F9FA] text-gray-800 font-sans">
+
+    <header class="bg-[#2D3436] text-white py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <h1 class="text-2xl font-bold tracking-tighter">J^K <span class="font-light">Market</span></h1>
             
-            <div id="menu-auth" class="flex gap-4 items-center">
-                <p class="text-gray-400 text-sm italic">Cargando menú...</p>
+            <div class="flex-1 max-w-2xl w-full relative">
+                <input type="text" id="buscador" placeholder="Buscar en J^K Market..." 
+                    class="w-full bg-white text-gray-800 rounded-md py-2 px-10 outline-none focus:ring-2 focus:ring-green-500 text-sm">
+                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
+
+            <div id="menu-auth" class="flex items-center gap-6 text-xs font-bold tracking-widest uppercase">
+                </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Productos para ti</h2>
-        
-        <div id="contenedor-productos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <p class="col-span-full text-gray-500 italic">Cargando productos...</p>
-        </div>
-    </main>
+    <div class="flex flex-col md:flex-row">
+        <aside class="w-full md:w-64 bg-[#2D3436] text-gray-400 min-h-screen p-6 hidden md:block">
+            <h3 class="text-white text-sm font-bold mb-6 uppercase tracking-widest">Filters</h3>
+            <div class="space-y-6">
+                <div>
+                    <p class="text-[10px] mb-3 uppercase font-black">Categorías</p>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex items-center gap-2 hover:text-white cursor-pointer"><input type="checkbox" class="rounded bg-gray-700 border-none"> Ropa</li>
+                        <li class="flex items-center gap-2 hover:text-white cursor-pointer"><input type="checkbox" class="rounded bg-gray-700 border-none"> Electrónica</li>
+                        <li class="flex items-center gap-2 hover:text-white cursor-pointer"><input type="checkbox" class="rounded bg-gray-700 border-none"> Hogar</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-[10px] mb-3 uppercase font-black">Precio</p>
+                    <input type="range" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-green-500">
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-8">
+            <div class="bg-[#3B7A57] rounded-lg p-10 mb-10 text-white relative overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-black mb-2 uppercase italic tracking-tighter">¡OFERTAS DE VERANO!</h2>
+                    <p class="text-xl font-light">Hasta <span class="font-bold underline text-green-200">50% DTO</span></p>
+                </div>
+                <div class="absolute right-0 top-0 h-full w-1/3 bg-white/5 skew-x-12"></div>
+            </div>
+
+            <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+        </main>
+    </div>
 
     <script type="module" src="js/main.js"></script>
 </body>

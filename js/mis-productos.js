@@ -1,33 +1,43 @@
 import { db, auth } from './firebase-config.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { collection, query, where, onSnapshot, doc, deleteDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const lista = document.getElementById('mis-productos-lista');
-const modal = document.getElementById('modal-editar');
-const formEditar = document.getElementById('form-editar');
+const userHeader = document.getElementById('user-header');
+const contador = document.getElementById('contador-productos');
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        document.getElementById('user-email').innerText = user.email;
-        document.getElementById('user-avatar').innerText = user.email.charAt(0).toUpperCase();
+        // Mostrar info del usuario en el header
+        userHeader.innerHTML = `
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-tighter">${user.email}</span>
+            <button id="btn-salir" class="bg-red-500/10 text-red-500 px-4 py-1.5 rounded-full text-[10px] font-black uppercase hover:bg-red-500 hover:text-white transition">Salir</button>
+        `;
+        document.getElementById('btn-salir').onclick = () => signOut(auth);
 
+        // Consulta de productos del usuario
         const q = query(collection(db, "productos"), where("vendedorId", "==", user.uid));
 
         onSnapshot(q, (snapshot) => {
             lista.innerHTML = "";
+            contador.innerText = `(${snapshot.size} en total)`;
+
             snapshot.forEach((res) => {
                 const p = res.data();
                 const id = res.id;
 
                 lista.innerHTML += `
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col">
-                        <img src="${p.foto}" class="w-full h-40 object-cover">
-                        <div class="p-4 flex-grow">
-                            <h4 class="font-bold text-gray-700 truncate">${p.titulo}</h4>
-                            <p class="text-blue-600 font-bold">$${p.precio}</p>
-                            <div class="flex gap-2 mt-4">
-                                <button onclick="prepararEdicion('${id}')" class="flex-1 bg-blue-100 text-blue-600 py-2 rounded-lg text-xs font-bold hover:bg-blue-200 transition">Editar</button>
-                                <button onclick="eliminarProducto('${id}')" class="flex-1 bg-red-100 text-red-600 py-2 rounded-lg text-xs font-bold hover:bg-red-200 transition">Eliminar</button>
+                    <div class="bg-white rounded-[2.5rem] p-4 flex flex-col shadow-xl group">
+                        <div class="relative h-48 rounded-[2rem] overflow-hidden mb-4">
+                            <img src="${p.foto}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h4 class="text-gray-900 font-black text-sm uppercase tracking-tighter mb-1 truncate">${p.titulo}</h4>
+                            <p class="text-[#3B7A57] font-black text-2xl mb-4">$${p.precio}</p>
+                            
+                            <div class="flex gap-2">
+                                <button onclick="prepararEdicion('${id}')" class="flex-1 bg-blue-50 text-blue-600 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition">Editar</button>
+                                <button onclick="eliminarProducto('${id}')" class="flex-1 bg-red-50 text-red-600 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-600 hover:text-white transition">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -39,49 +49,35 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// 1. Cargar datos en el modal
+// Funciones Globales para los botones
 window.prepararEdicion = async (id) => {
-    const docRef = doc(db, "productos", id);
-    const docSnap = await getDoc(docRef);
-
+    const docSnap = await getDoc(doc(db, "productos", id));
     if (docSnap.exists()) {
         const p = docSnap.data();
         document.getElementById('edit-id').value = id;
         document.getElementById('edit-titulo').value = p.titulo;
         document.getElementById('edit-precio').value = p.precio;
-        document.getElementById('edit-whatsapp').value = p.whatsapp || "";
-        modal.classList.remove('hidden'); // Mostramos el modal
+        document.getElementById('edit-whatsapp').value = p.whatsapp;
+        document.getElementById('modal-editar').classList.remove('hidden');
     }
 };
 
-// 2. Cerrar modal
-window.cerrarModal = () => {
-    modal.classList.add('hidden');
+window.cerrarModal = () => document.getElementById('modal-editar').classList.add('hidden');
+
+window.eliminarProducto = async (id) => {
+    if (confirm("¿Estás seguro de eliminar este anuncio?")) {
+        await deleteDoc(doc(db, "productos", id));
+    }
 };
 
-// 3. Guardar cambios en Firebase
-formEditar.addEventListener('submit', async (e) => {
+document.getElementById('form-editar').onsubmit = async (e) => {
     e.preventDefault();
     const id = document.getElementById('edit-id').value;
-    
-    const nuevosDatos = {
+    const update = {
         titulo: document.getElementById('edit-titulo').value,
         precio: Number(document.getElementById('edit-precio').value),
         whatsapp: document.getElementById('edit-whatsapp').value
     };
-
-    try {
-        await updateDoc(doc(db, "productos", id), nuevosDatos);
-        alert("¡Producto actualizado!");
-        cerrarModal();
-    } catch (error) {
-        alert("Error al actualizar: " + error.message);
-    }
-});
-
-// Función eliminar (ya la tenías)
-window.eliminarProducto = async (id) => {
-    if (confirm("¿Borrar este producto?")) {
-        await deleteDoc(doc(db, "productos", id));
-    }
+    await updateDoc(doc(db, "productos", id), update);
+    cerrarModal();
 };

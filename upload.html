@@ -3,56 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vender Producto | J^K Market</title>
+    <title>Publicar | J^K Market</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-[#1E1E1E] text-white font-sans min-h-screen">
 
-    <header class="bg-white shadow-sm p-4">
-        <div class="max-w-2xl mx-auto flex items-center">
-            <a href="index.html" class="text-blue-600 font-bold flex items-center gap-2">
-                ← <span class="hover:underline">Volver al inicio</span>
-            </a>
-        </div>
+    <header class="p-6 flex justify-between items-center max-w-7xl mx-auto">
+        <h1 class="text-2xl font-black">J^K <span class="font-light opacity-50">Market</span></h1>
+        <a href="index.html" class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition">← Volver al inicio</a>
     </header>
 
-    <main class="max-w-xl mx-auto p-6">
-        <div class="bg-white rounded-2xl shadow-md p-8">
-            <h2 class="text-2xl font-bold mb-6 text-center">¿Qué quieres vender hoy?</h2>
+    <main class="max-w-5xl mx-auto p-4 md:p-8">
+        <div class="bg-[#3B7A57] rounded-2xl p-6 mb-8 flex justify-between items-center overflow-hidden relative">
+            <div>
+                <h2 class="text-2xl font-black italic uppercase">¡Publica hoy mismo!</h2>
+                <p class="text-green-100 text-sm">Tu anuncio llegará a cientos de personas.</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/5906/5906103.png" class="w-16 h-16 opacity-20 absolute right-4">
+        </div>
+
+        <form id="form-publicar" class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <form id="form-subida" class="space-y-4">
-                <div>
-                    <div>
-    <label class="block text-sm font-medium text-gray-700">Foto del producto</label>
-    <input type="file" id="input-foto" accept="image/*" 
-           class="w-full border border-gray-300 rounded-lg px-4 py-2">
-</div>
+            <div class="space-y-4">
+                <p class="text-xs font-bold uppercase tracking-widest text-gray-500">Fotos del producto</p>
+                <label for="foto" class="group relative flex flex-col items-center justify-center w-full h-80 border-2 border-dashed border-gray-700 rounded-[2.5rem] bg-[#252525] cursor-pointer hover:border-[#3B7A57] transition-all overflow-hidden">
+                    <div id="preview-container" class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-12 h-12 mb-4 text-gray-500 group-hover:text-[#3B7A57] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <p class="text-sm text-gray-400"><span class="font-bold text-white">Haz clic</span> o arrastra tu foto</p>
+                    </div>
+                    <img id="img-preview" class="hidden absolute inset-0 w-full h-full object-cover">
+                    <input id="foto" type="file" class="hidden" accept="image/*" required />
+                </label>
+                <div class="bg-[#252525] p-4 rounded-2xl flex items-center gap-4 border border-gray-800">
+                   <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">📷</div>
+                   <p class="text-[10px] text-gray-500 leading-tight">Usa fotos reales y con buena iluminación para vender más rápido.</p>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <p class="text-xs font-bold uppercase tracking-widest text-gray-500">Detalles de la oferta</p>
+                
+                <input type="text" id="titulo" placeholder="Ej. iPhone 13 Pro, nuevo, 256GB" 
+                    class="w-full bg-[#252525] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] transition-all placeholder:text-gray-600">
+
+                <input type="text" id="whatsapp" placeholder="WhatsApp de contacto (ej: 51999888777)" 
+                    class="w-full bg-[#252525] border border-gray-800 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-[#3B7A57] transition-all placeholder:text-gray-600">
+
+                <div class="relative">
+                    <span class="absolute left-6 top-4 text-gray-600 font-bold">$</span>
+                    <input type="number" id="precio" placeholder="Precio" 
+                        class="w-full bg-[#252525] border border-gray-800 rounded-2xl py-4 pl-10 pr-6 outline-none focus:ring-2 focus:ring-[#3B7A57] transition-all placeholder:text-gray-600">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Nombre del producto</label>
-                    <input type="text" id="nombre" placeholder="Ej. iPhone 13 Pro" 
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Precio ($)</label>
-                    <input type="number" id="precio" placeholder="0.00" 
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-
-                <div>
-    <label class="block text-sm font-semibold text-gray-600 mb-1">WhatsApp de contacto (con código de país)</label>
-    <input type="text" id="whatsapp" placeholder="Ej: 51999888777" required 
-           class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-green-500 transition-all">
-    <p class="text-xs text-gray-400 mt-1">Incluye el código de tu país sin el signo +</p>
-</div>
-
-                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition shadow-lg mt-4">
+                <button type="submit" id="btn-publicar" class="w-full bg-[#3B7A57] text-white py-4 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl shadow-green-900/20 hover:bg-[#2D5A41] transition-all active:scale-95 flex items-center justify-center gap-3">
                     Publicar Producto
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </main>
 
     <script type="module" src="js/upload.js"></script>
