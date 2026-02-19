@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | J^K Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-extrabold text-blue-600 italic">J^K Market</h2>
+            <p class="text-gray-500 mt-2">¡Qué bueno verte de nuevo!</p>
+        </div>
+        
+        <form id="form-login" class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold text-gray-600 mb-1">Correo electrónico</label>
+                <input type="email" id="login-email" placeholder="tu@correo.com" required 
+                       class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-semibold text-gray-600 mb-1">Contraseña</label>
+                <input type="password" id="login-pass" placeholder="••••••••" required 
+                       class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                
+                <div class="text-right mt-1">
+                    <button type="button" id="btn-olvido" class="text-xs text-blue-500 hover:underline font-medium">
+                        ¿Olvidaste tu contraseña?
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold text-lg hover:bg-blue-700 transform active:scale-95 transition-all shadow-lg shadow-blue-200">
+                Entrar a mi cuenta
+            </button>
+        </form>
+        
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+            <p class="text-gray-500 italic text-sm">¿Aún no tienes cuenta?</p>
+            <a href="register.html" class="text-blue-600 font-bold hover:underline">Regístrate gratis aquí</a>
+        </div>
+
+        <div class="mt-4 text-center">
+            <a href="index.html" class="text-gray-400 text-xs hover:text-gray-600 transition">← Volver al inicio</a>
+        </div>
+    </div>
+
+    <script type="module" src="js/login.js"></script>
+</body>
+</html>

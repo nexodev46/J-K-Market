@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender Producto | J^K Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-sm p-4">
+        <div class="max-w-2xl mx-auto flex items-center">
+            <a href="index.html" class="text-blue-600 font-bold flex items-center gap-2">
+                ← <span class="hover:underline">Volver al inicio</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-xl mx-auto p-6">
+        <div class="bg-white rounded-2xl shadow-md p-8">
+            <h2 class="text-2xl font-bold mb-6 text-center">¿Qué quieres vender hoy?</h2>
+            
+            <form id="form-subida" class="space-y-4">
+                <div>
+                    <div>
+    <label class="block text-sm font-medium text-gray-700">Foto del producto</label>
+    <input type="file" id="input-foto" accept="image/*" 
+           class="w-full border border-gray-300 rounded-lg px-4 py-2">
+</div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombre del producto</label>
+                    <input type="text" id="nombre" placeholder="Ej. iPhone 13 Pro" 
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Precio ($)</label>
+                    <input type="number" id="precio" placeholder="0.00" 
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+
+                <div>
+    <label class="block text-sm font-semibold text-gray-600 mb-1">WhatsApp de contacto (con código de país)</label>
+    <input type="text" id="whatsapp" placeholder="Ej: 51999888777" required 
+           class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-green-500 transition-all">
+    <p class="text-xs text-gray-400 mt-1">Incluye el código de tu país sin el signo +</p>
+</div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition shadow-lg mt-4">
+                    Publicar Producto
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="js/upload.js"></script>
+</body>
+</html>

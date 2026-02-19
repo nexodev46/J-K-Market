@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J^K Market | Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-blue-600 tracking-tight">
+                J^K <span class="text-gray-900">Market</span>
+            </h1>
+            
+            <div id="menu-auth" class="flex gap-4 items-center">
+                <p class="text-gray-400 text-sm italic">Cargando menú...</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-6">Productos para ti</h2>
+        
+        <div id="contenedor-productos" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <p class="col-span-full text-gray-500 italic">Cargando productos...</p>
+        </div>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
