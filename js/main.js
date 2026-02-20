@@ -178,3 +178,60 @@ function actualizarBotonesMovil(categoriaActiva) {
         }
     });
 }
+
+
+
+
+
+
+
+
+// 1. FUNCIÓN PARA FILTRAR POR CATEGORÍA EN MÓVIL
+window.filtrarPrincipal = (categoria) => {
+    const tarjetas = document.querySelectorAll('#contenedor-productos > div');
+    
+    tarjetas.forEach(tarjeta => {
+        const contenido = tarjeta.innerText.toLowerCase();
+        if (categoria === 'Todos' || contenido.includes(categoria.toLowerCase())) {
+            tarjeta.style.display = 'block';
+        } else {
+            tarjeta.style.display = 'none';
+        }
+    });
+
+    // Cambia el color del botón para mostrar cuál está seleccionado
+    actualizarEstiloBotones(categoria);
+};
+
+// 2. FUNCIÓN PARA FILTRAR POR PRECIO EN MÓVIL
+window.filtrarPorPrecioMovil = (valor) => {
+    // Actualiza el número que ve el usuario ($10,000, etc.)
+    document.getElementById('precio-valor-movil').innerText = `$${Number(valor).toLocaleString()}`;
+
+    const tarjetas = document.querySelectorAll('#contenedor-productos > div');
+    tarjetas.forEach(tarjeta => {
+        // Buscamos el precio dentro de la tarjeta
+        const precioElemento = tarjeta.querySelector('.text-\\[\\#3B7A57\\]') || tarjeta.querySelector('p');
+        if (precioElemento) {
+            const precioActual = Number(precioElemento.innerText.replace(/[^0-9.-]+/g, ""));
+            
+            if (precioActual <= valor) {
+                tarjeta.style.display = 'block';
+            } else {
+                tarjeta.style.display = 'none';
+            }
+        }
+    });
+};
+
+// 3. FUNCIÓN AUXILIAR PARA LOS BOTONES
+function actualizarEstiloBotones(categoriaActiva) {
+    const botones = document.querySelectorAll('.md\\:hidden button');
+    botones.forEach(btn => {
+        if (btn.innerText === categoriaActiva) {
+            btn.className = "bg-[#3B7A57] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap shadow-lg";
+        } else {
+            btn.className = "bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition";
+        }
+    });
+}

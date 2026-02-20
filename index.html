@@ -118,11 +118,23 @@
                 <div class="absolute right-[-10%] top-[-20%] h-[150%] w-1/2 bg-white/10 skew-x-[25deg] blur-3xl"></div>
             </div>
 
-            <div class="md:hidden flex gap-3 overflow-x-auto pb-8 px-2 no-scrollbar">
+            <div class="md:hidden flex gap-3 overflow-x-auto pb-4 px-2 no-scrollbar">
                 <button onclick="filtrarPrincipal('Todos')" class="bg-[#3B7A57] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap shadow-lg shadow-green-900/40">Todos</button>
                 <button onclick="filtrarPrincipal('Ropa')" class="bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition">Ropa</button>
                 <button onclick="filtrarPrincipal('Electrónica')" class="bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition">Electrónica</button>
                 <button onclick="filtrarPrincipal('Hogar')" class="bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition">Hogar</button>
+            </div>
+
+            <div class="md:hidden px-2 pb-8">
+                <div class="bg-white/40 backdrop-blur-md rounded-[2rem] p-4 border border-black/5 shadow-sm">
+                    <div class="flex justify-between items-center mb-2 px-1">
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Máximo:</span>
+                        <span id="precio-valor-movil" class="text-[#3B7A57] font-black text-sm">$10,000</span>
+                    </div>
+                    <input type="range" id="rango-precio-movil" min="0" max="10000" step="50" value="10000"
+                        class="w-full h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-[#3B7A57]"
+                        oninput="filtrarPorPrecioMovil(this.value)">
+                </div>
             </div>
 
             <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
