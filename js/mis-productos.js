@@ -112,23 +112,4 @@ document.getElementById('form-editar').onsubmit = async (e) => {
 
 
 
-// Agrega esto al final de tu js/mis-productos.js
-window.filtrarPorCategoria = (categoria) => {
-    const productos = document.querySelectorAll('#mis-productos-lista > div');
-    
-    productos.forEach(card => {
-        // Asumiendo que guardas la categoría en el objeto del producto
-        // Si no usas categorías aún, este código servirá de base:
-        if (categoria === 'Todos') {
-            card.style.display = 'flex';
-        } else {
-            // Aquí comparamos el texto del título o un atributo data
-            const titulo = card.querySelector('h4').innerText.toLowerCase();
-            if (titulo.includes(categoria.toLowerCase())) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        }
-    });
-};
+
