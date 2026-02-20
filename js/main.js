@@ -136,3 +136,45 @@ buscador.addEventListener('input', (e) => {
 });
 
 obtenerProductos();
+
+
+
+
+// Función global para filtrar productos en el inicio (Móvil)
+window.filtrarPrincipal = (categoria) => {
+    const contenedor = document.getElementById('contenedor-productos');
+    const tarjetas = contenedor.querySelectorAll('.animate-fadeIn'); // Seleccionamos las tarjetas
+
+    tarjetas.forEach(tarjeta => {
+        // Obtenemos el texto de la tarjeta (título, descripción, etc.)
+        const contenido = tarjeta.innerText.toLowerCase();
+        
+        if (categoria === 'Todos') {
+            tarjeta.style.display = 'block';
+        } else {
+            // Si el contenido de la tarjeta incluye la categoría (ej: "ropa")
+            if (contenido.includes(categoria.toLowerCase())) {
+                tarjeta.style.display = 'block';
+            } else {
+                tarjeta.style.display = 'none';
+            }
+        }
+    });
+
+    // Opcional: Feedback visual (cambiar color del botón activo)
+    actualizarBotonesMovil(categoria);
+};
+
+// Función para resaltar el botón que está seleccionado
+function actualizarBotonesMovil(categoriaActiva) {
+    const botones = document.querySelectorAll('.md\\:hidden button');
+    botones.forEach(btn => {
+        if (btn.innerText === categoriaActiva) {
+            btn.classList.add('bg-[#3B7A57]', 'text-white', 'shadow-lg');
+            btn.classList.remove('bg-white/5', 'text-gray-500');
+        } else {
+            btn.classList.remove('bg-[#3B7A57]', 'text-white', 'shadow-lg');
+            btn.classList.add('bg-white/5', 'text-gray-500');
+        }
+    });
+}

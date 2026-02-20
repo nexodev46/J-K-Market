@@ -34,6 +34,15 @@
             background: #3B7A57;
             border-radius: 10px;
         }
+
+        /* Ocultar barra de scroll en el menú de categorías móvil */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="bg-[#F8F9FA] text-gray-800 font-sans">
@@ -49,13 +58,12 @@
             </div>
 
             <div id="menu-auth" class="flex items-center gap-4">
-                </div>
+            </div>
         </div>
     </header>
 
     <div class="flex flex-col md:flex-row">
         <aside class="w-full md:w-64 bg-[#2D3436] text-gray-400 md:h-[calc(100vh-72px)] sticky top-[72px] p-6 flex flex-col justify-between hidden md:flex border-r border-gray-700">
-            
             <div>
                 <h3 class="text-white text-xs font-black mb-8 uppercase tracking-[0.2em] opacity-50">Filters</h3>
                 
@@ -101,7 +109,7 @@
         </aside>
 
         <main class="flex-1 p-4 md:p-8">
-            <div class="bg-[#3B7A57] rounded-3xl p-8 md:p-12 mb-10 text-white relative overflow-hidden shadow-2xl shadow-green-900/20">
+            <div class="bg-[#3B7A57] rounded-3xl p-8 md:p-12 mb-6 text-white relative overflow-hidden shadow-2xl shadow-green-900/20">
                 <div class="relative z-10">
                     <span class="bg-black/20 text-[10px] px-3 py-1 rounded-full uppercase font-black tracking-widest mb-4 inline-block">Temporada 2026</span>
                     <h2 class="text-4xl md:text-6xl font-black mb-2 uppercase italic tracking-tighter leading-none">¡OFERTAS DE VERANO!</h2>
@@ -110,8 +118,15 @@
                 <div class="absolute right-[-10%] top-[-20%] h-[150%] w-1/2 bg-white/10 skew-x-[25deg] blur-3xl"></div>
             </div>
 
+            <div class="md:hidden flex gap-3 overflow-x-auto pb-8 px-2 no-scrollbar">
+                <button onclick="filtrarPrincipal('Todos')" class="bg-[#3B7A57] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap shadow-lg shadow-green-900/40">Todos</button>
+                <button onclick="filtrarPrincipal('Ropa')" class="bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition">Ropa</button>
+                <button onclick="filtrarPrincipal('Electrónica')" class="bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition">Electrónica</button>
+                <button onclick="filtrarPrincipal('Hogar')" class="bg-white/5 border border-black/5 text-gray-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap hover:bg-gray-100 transition">Hogar</button>
+            </div>
+
             <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                </div>
+            </div>
         </main>
     </div>
 
